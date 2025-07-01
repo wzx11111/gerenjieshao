@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>吴泽轩 - 个人简历</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+
+  <!-- 引入CSS样式 -->
+  <link rel="stylesheet" href="wzx.css">
+
+  <!-- 配置Tailwind CSS -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0071e3',       // Forza蓝
+            secondary: '#ff6b00',     // 活力橙
+            dark: '#0f172a',          // 深色背景
+            darker: '#020617',        // 更深色背景
+            lightText: '#f8fafc',      // 浅色文本
+            mediumText: '#94a3b8',    // 中等色文本
+            accentGlow: '#00b4d8',    // 发光强调色
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 1s ease-in-out',
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-slow': 'pulse 3s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          }
+        },
+      }
+    }
+  </script>
+</head>
+
+<body class="font-inter">
+  <!-- 导航栏 -->
+  <nav class="navbar py-4 px-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold">吴泽轩</a>
+
+      <!-- 桌面端导航 -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#about" class="nav-link">个人简介</a>
+        <a href="#projects" class="nav-link">项目经验</a>
+        <a href="#skills" class="nav-link">专业技能</a>
+        <a href="#education" class="nav-link">教育背景</a>
+        <a href="#contact" class="nav-link">联系方式</a>
+      </div>
+
+      <!-- 深色模式切换 -->
+      <button id="darkModeToggle" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+        <i class="fas fa-moon-o dark:hidden text-xl"></i>
+        <i class="fas fa-sun-o hidden dark:inline-block text-xl"></i>
+      </button>
+
+      <!-- 移动端菜单按钮 -->
+      <button class="md:hidden menu-toggle" id="menuToggle">
+        <span></span>
+      </button>
+    </div>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-menu absolute top-6 right-6 text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+      <!-- <div class="flex flex-col items-center space-y-6 text-2xl">
+        <a href="#about" class="nav-link">个人简介</a>
+        <a href="#projects" class="nav-link">项目经验</a>
+        <a href="#skills" class="nav-link">专业技能</a>
+        <a href="#education" class="nav-link">教育背景</a>
+        <a href="#contact" class="nav-link">联系方式</a>
+      </div> -->
+    </div>
+  </nav>
+
+  <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- 动态背景 - 模仿Forza的渐变光效 -->
+    <div class="absolute inset-0 bg-gradient-to-br from-darker to-dark z-0"></div>
+    <div class="absolute inset-0 bg-[url('https://picsum.photos/id/1015/1920/1080')] bg-cover bg-center opacity-20 z-0">
+    </div>
+    <div class="absolute inset-0 bg-glow"
+      style="background: radial-gradient(circle at 30% 40%, var(--accentGlow) 0%, transparent 70%); opacity: 0.3; z-index: 0;">
+    </div>
+
+    <div class="container mx-auto px-4 z-10 text-center">
+      <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-4 animate-fade-in">吴泽轩</h1>
+      <p class="text-[clamp(1rem,3vw,1.5rem)] text-mediumText mb-8 max-w-2xl mx-auto">
+        前端开发工程师 | 专注于打造沉浸式用户体验
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+        <a href="#projects" class="btn">
+          <i class="fas fa-code mr-2"></i>查看项目
+        </a>
+        <a href="#contact" class="btn bg-gradient-to-r from-secondary to-[#ff9500]">
+          <i class="fas fa-envelope mr-2"></i>联系我
+        </a>
+      </div>
+
+      <!-- 滚动指示器 - Forza风格动态提示 -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+        <i class="fas fa-chevron-down text-2xl text-primary/70"></i>
+      </div>
+    </div>
+
+    <!-- 粒子动画背景 - 增强科技感 -->
+    <canvas id="particles" class="absolute inset-0 z-0"></canvas>
+  </header>
+
+  <!-- 个人简介部分 -->
+  <section id="about" class="py-20 bg-darker">
+    <div class="container mx-auto px-4">
+      <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-12 text-center">个人简介</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+        <div class="lg:col-span-1">
+          <div class="relative">
+            <img src="/1/1.jpg" alt="个人照片"
+              class="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+            <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-secondary rounded-full opacity-20 -z-10"></div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <p class="text-lg mb-6 text-lightText">
+            我是一名热爱前端开发的工程师，拥有1年的Web开发经验，专注于打造高性能、视觉吸引力强的用户界面。
+            擅长使用JS , CSS等工具构建响应式应用。
+          </p>
+
+          <p class="text-lg mb-6 text-lightText">
+            我的开发理念是将技术与设计完美结合，不仅关注代码的可维护性和性能优化，还注重用户体验的细节打磨。
+            曾参与多个大型项目的前端架构设计与实现，具备丰富的团队协作经验。
+          </p>
+
+          <div class="flex flex-wrap gap-4 mt-8">
+            <a href="#contact" class="btn">
+              <i class="fas fa-envelope mr-2"></i>联系我
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目作品集 -->
+  <section id="projects" class="py-20 bg-darker">
+    <div class="container mx-auto px-4">
+      <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-16 text-center">项目作品集</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+        <!-- 项目卡片将通过JS动态生成 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 专业技能 -->
+  <section id="skills" class="py-20 bg-gradient-to-b from-darker to-dark">
+    <div class="container mx-auto px-4">
+      <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-16 text-center">专业技能</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold mb-8">技术技能</h3>
+
+          <div class="space-y-6" id="skillsContainer">
+            <!-- 技能进度条将通过JS动态生成 -->
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold mb-8">综合能力</h3>
+
+          <div class="bg-darker p-6 rounded-xl border border-primary/20">
+            <canvas id="skillsRadarChart" class="w-full"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教育背景 -->
+  <section id="education" class="py-20 bg-darker">
+    <div class="container mx-auto px-4">
+      <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-16 text-center">教育历程</h2>
+
+      <div class="timeline relative max-w-4xl mx-auto">
+        <!-- 时间轴中心线 - Forza风格发光效果 -->
+        <div
+          class="timeline-center absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-transparent via-primary to-transparent">
+        </div>
+
+        <!-- 时间节点将通过JS动态生成 -->
+        <div id="educationTimeline"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系方式 -->
+  <section id="contact" class="py-20 bg-gradient-to-b from-darker to-dark">
+    <div class="container mx-auto px-4">
+      <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-16 text-center">联系方式</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <div class="bg-darker p-8 rounded-xl border border-primary/20">
+            <h3 class="text-2xl font-bold mb-6">联系信息</h3>
+
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                  <i class="fas fa-envelope text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">邮箱</h4>
+                  <p class="text-mediumText">3279285308@qq.com</p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                  <i class="fas fa-phone text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">电话</h4>
+                  <p class="text-mediumText">+86 159 **** 6712</p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                  <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium text-lg">地址</h4>
+                  <p class="text-mediumText">三亚学院</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h4 class="font-medium text-lg mb-4">社交媒体</h4>
+              <div class="flex space-x-4">
+                <a href="#"
+                  class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-darker p-8 rounded-xl border border-primary/20">
+            <h3 class="text-2xl font-bold mb-6">发送消息</h3>
+
+            <form id="contactForm" class="space-y-4">
+              <div>
+                <label for="name" class="block text-mediumText mb-2">姓名</label>
+                <input type="text" id="name"
+                  class="w-full px-4 py-3 bg-dark border border-primary/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-lightText"
+                  placeholder="你的姓名">
+              </div>
+
+              <div>
+                <label for="email" class="block text-mediumText mb-2">邮箱</label>
+                <input type="email" id="email"
+                  class="w-full px-4 py-3 bg-dark border border-primary/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-lightText"
+                  placeholder="你的邮箱">
+              </div>
+
+              <div>
+                <label for="subject" class="block text-mediumText mb-2">主题</label>
+                <input type="text" id="subject"
+                  class="w-full px-4 py-3 bg-dark border border-primary/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-lightText"
+                  placeholder="消息主题">
+              </div>
+
+              <div>
+                <label for="message" class="block text-mediumText mb-2">消息</label>
+                <textarea id="message" rows="5"
+                  class="w-full px-4 py-3 bg-dark border border-primary/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-lightText"
+                  placeholder="请输入你的消息..."></textarea>
+              </div>
+
+              <button type="submit" class="btn w-full">
+                <i class="fas fa-paper-plane mr-2"></i>发送消息
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="py-12 bg-darker border-t border-primary/20">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-mediumText">&copy; 2025 吴泽轩. 保留所有权利.</p>
+      <p class="text-mediumText mt-4">打造于 ❤ 前端开发课程项目</p>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- 聊天机器人组件 -->
+  <div class="chatbot-container fixed bottom-6 right-6 z-50">
+    <button id="chatbotToggle"
+      class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+      <i class="fas fa-comments text-white text-xl"></i>
+      <span
+        class="absolute -top-2 -right-2 w-6 h-6 bg-secondary text-white text-xs rounded-full flex items-center justify-center">AI</span>
+    </button>
+
+    <div id="chatbotPanel"
+      class="hidden w-80 max-h-[80vh] overflow-hidden rounded-xl shadow-2xl bg-darker border border-primary/30 absolute bottom-16 right-0">
+      <div class="chatbot-header bg-gradient-to-r from-primary to-blue-600 p-4 flex justify-between items-center">
+        <h3 class="font-bold text-white">智能助手</h3>
+        <button id="chatbotClose" class="text-white">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div id="chatMessages" class="p-4 overflow-y-auto flex-grow space-y-4">
+        <div class="message bot-message">
+          <div class="message-content bg-dark rounded-lg p-3 inline-block max-w-[80%]">
+            <p class="text-lightText">你好！我是你的职业助手，有任何关于简历或技术的问题都可以问我 😊</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chatbot-input p-4 border-t border-primary/20">
+        <form id="chatForm" class="flex">
+          <input type="text" id="chatInput"
+            class="flex-grow px-4 py-2 bg-dark border border-primary/30 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary text-lightText"
+            placeholder="输入消息...">
+          <button type="submit"
+            class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition-colors">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入JavaScript -->
+  <script src="/wzx.js"></script>
+
+</body>
+
+</html>
